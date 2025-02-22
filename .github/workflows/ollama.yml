@@ -166,6 +166,8 @@ on:
         description: Prompt
         required: true
 
+permissions: {}
+
 jobs:
   ollama:
     runs-on: ubuntu-latest
