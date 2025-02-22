@@ -2,7 +2,7 @@
 
 🦙 Ollama GitHub Action demo.
 
-See [workflow](.github/workflows/ollama.yml).
+Dispatch [workflow](https://github.com/ai-action/ollama-github-action-demo/actions/workflows/ollama.yml).
 
 ## License
 
