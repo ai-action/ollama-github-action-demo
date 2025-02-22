@@ -1,0 +1,183 @@
+name: ollama
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Model (ollama.com/library)
+        default: llama3.3
+        type: choice
+        options:
+          - deepseek-r1
+          - llama3.3
+          - phi4
+          - llama3.2
+          - llama3.1
+          - nomic-embed-text
+          - mistral
+          - llama3
+          - qwen
+          - qwen2.5
+          - gemma
+          - qwen2
+          - llava
+          - llama2
+          - phi3
+          - gemma2
+          - qwen2.5-coder
+          - codellama
+          - mxbai-embed-large
+          - tinyllama
+          - llama3.2-vision
+          - mistral-nemo
+          - starcoder2
+          - snowflake-arctic-embed
+          - deepseek-coder-v2
+          - deepseek-v3
+          - mixtral
+          - deepseek-coder
+          - llama2-uncensored
+          - dolphin-mixtral
+          - openthinker
+          - codegemma
+          - phi
+          - bge-m3
+          - wizardlm2
+          - llava-llama3
+          - dolphin-mistral
+          - minicpm-v
+          - all-minilm
+          - dolphin-llama3
+          - command-r
+          - orca-mini
+          - yi
+          - hermes3
+          - smollm2
+          - phi3.5
+          - zephyr
+          - codestral
+          - granite-code
+          - starcoder
+          - wizard-vicuna-uncensored
+          - smollm
+          - mistral-small
+          - vicuna
+          - dolphin3
+          - mistral-openorca
+          - qwq
+          - llama2-chinese
+          - openchat
+          - olmo2
+          - codegeex4
+          - aya
+          - codeqwen
+          - deepseek-llm
+          - mistral-large
+          - nous-hermes2
+          - glm4
+          - deepseek-v2
+          - stable-code
+          - openhermes
+          - command-r-plus
+          - tinydolphin
+          - qwen2-math
+          - wizardcoder
+          - bakllava
+          - moondream
+          - stablelm2
+          - neural-chat
+          - reflection
+          - wizard-math
+          - llama3-gradient
+          - llama3-chatqa
+          - sqlcoder
+          - xwinlm
+          - dolphincoder
+          - bge-large
+          - nous-hermes
+          - phind-codellama
+          - yarn-llama2
+          - solar
+          - llava-phi3
+          - starling-lm
+          - wizardlm
+          - athene-v2
+          - yi-coder
+          - granite3.1-dense
+          - internlm2
+          - samantha-mistral
+          - falcon
+          - nemotron-mini
+          - nemotron
+          - dolphin-phi
+          - orca2
+          - wizardlm-uncensored
+          - stable-beluga
+          - deepscaler
+          - granite3-dense
+          - llama3-groq-tool-use
+          - medllama2
+          - meditron
+          - llama-pro
+          - yarn-mistral
+          - smallthinker
+          - aya-expanse
+          - granite3-moe
+          - nexusraven
+          - codeup
+          - nous-hermes2-mixtral
+          - falcon3
+          - everythinglm
+          - paraphrase-multilingual
+          - shieldgemma
+          - falcon2
+          - granite3.1-moe
+          - magicoder
+          - mathstral
+          - stablelm-zephyr
+          - marco-o1
+          - codebooga
+          - reader-lm
+          - snowflake-arctic-embed2
+          - solar-pro
+          - duckdb-nsql
+          - mistrallite
+          - wizard-vicuna
+          - llama-guard3
+          - megadolphin
+          - nuextract
+          - deepseek-v2.5
+          - exaone3.5
+          - notux
+          - opencoder
+          - open-orca-platypus2
+          - notus
+          - goliath
+          - bespoke-minicheck
+          - command-r7b
+          - firefunction-v2
+          - dbrx
+          - tulu3
+          - granite-embedding
+          - granite3-guardian
+          - alfred
+          - sailor2
+          - r1-1776
+      prompt:
+        description: Prompt
+        required: true
+
+jobs:
+  ollama:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Ollama
+        uses: ai-action/setup-ollama@v1
+
+      - name: Prepare Summary
+        run: |
+          echo '| Model | Prompt |' >> $GITHUB_STEP_SUMMARY
+          echo '| --- | --- |' >> $GITHUB_STEP_SUMMARY
+          echo '| ${{ inputs.model }} | ${{ toJSON(inputs.prompt) }} |' >> $GITHUB_STEP_SUMMARY
+
+      - name: Run LLM
+        run: ollama run ${{ inputs.model }} ${{ toJSON(inputs.prompt) }} >> $GITHUB_STEP_SUMMARY
