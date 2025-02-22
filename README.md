@@ -1,6 +1,6 @@
 # Ollama GitHub Action Demo
 
-🦙 Ollama GitHub Action demo.
+🦙 Ollama GitHub Action demo using [`setup-ollama`](https://github.com/ai-action/setup-ollama).
 
 Dispatch [workflow](https://github.com/ai-action/ollama-github-action-demo/actions/workflows/ollama.yml).
 
