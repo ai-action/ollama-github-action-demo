@@ -4,7 +4,7 @@ on:
     inputs:
       model:
         description: Model (ollama.com/library)
-        default: llama3.3
+        default: llama3.2
         type: choice
         options:
           - deepseek-r1
