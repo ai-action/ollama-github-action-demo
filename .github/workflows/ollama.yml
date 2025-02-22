@@ -179,7 +179,8 @@ jobs:
         run: |
           echo '| Model | Prompt |' >> $GITHUB_STEP_SUMMARY
           echo '| --- | --- |' >> $GITHUB_STEP_SUMMARY
-          echo '| ${{ inputs.model }} | ${{ toJSON(inputs.prompt) }} |' >> $GITHUB_STEP_SUMMARY
+          PROMPT=${{ toJSON(inputs.prompt) }}
+          echo "| ${{ inputs.model }} | $PROMPT |" >> $GITHUB_STEP_SUMMARY
 
       - name: Run LLM
         run: ollama run ${{ inputs.model }} ${{ toJSON(inputs.prompt) }} >> $GITHUB_STEP_SUMMARY
