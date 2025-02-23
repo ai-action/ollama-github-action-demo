@@ -1,4 +1,4 @@
-name: ollama
+name: Ollama
 on:
   workflow_dispatch:
     inputs:
