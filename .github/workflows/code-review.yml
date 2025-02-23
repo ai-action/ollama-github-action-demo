@@ -17,7 +17,7 @@ jobs:
 
       - name: Code review comment
         run: |
-          PROMPT='Code review the changes below:'
+          PROMPT='Code review the diff below:'
           RESPONSE=$(ollama run codellama "$PROMPT\n$(gh pr diff $PR_NUMBER)")
           gh pr comment $PR_NUMBER --body "$RESPONSE"
         env:
