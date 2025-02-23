@@ -17,8 +17,8 @@ jobs:
 
       - name: Code review comment
         run: |
-          PROMPT="Provide a code review of the following diff:\n$(gh pr diff $PR_NUMBER)"
-          RESPONSE=$(ollama run codellama "$PROMPT")
+          PROMPT='Code review the changes below:'
+          RESPONSE=$(ollama run codellama "$PROMPT\n$(gh pr diff $PR_NUMBER)")
           gh pr comment $PR_NUMBER --body "$RESPONSE"
         env:
           GITHUB_TOKEN: ${{ github.token }}
