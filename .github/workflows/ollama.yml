@@ -172,9 +172,6 @@ jobs:
   ollama:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Ollama
-        uses: ai-action/setup-ollama@v1
-
       - name: Prepare Summary
         run: |
           echo '| Model | Prompt |' >> $GITHUB_STEP_SUMMARY
