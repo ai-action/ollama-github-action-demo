@@ -9,17 +9,5 @@ jobs:
   code-review:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup ollama
-        uses: ai-action/setup-ollama@v1
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Code review comment
-        run: |
-          PROMPT='Code review the diff below:'
-          RESPONSE=$(ollama run codellama "$PROMPT\n$(gh pr diff $PR_NUMBER)")
-          gh pr comment $PR_NUMBER --body "$RESPONSE"
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+      - name: Code review
+        uses: ai-action/pull-request-review@v1
