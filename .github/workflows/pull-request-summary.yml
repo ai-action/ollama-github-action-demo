@@ -18,18 +18,18 @@ jobs:
       - name: Pull request summary
         run: |
           PROMPT=$(printf '%s\n%s' "$PROMPT" "$(gh pr diff $PR_NUMBER)")
-          RESPONSE=$(ollama run codellama "$PROMPT")
+          RESPONSE=$(ollama run codellama "$PROMPT" | sed 's/^/> /')
           BODY=$(gh pr view $PR_NUMBER --json body --jq .body)
-          COMMENT_START='<!-- pull-request-review-start -->'
-          COMMENT_END='<!-- pull-request-review-end -->'
+          COMMENT_START='<!--pull-request-review-start-->'
+          COMMENT_END='<!--pull-request-review-end-->'
           if [[ "$BODY" == *"$COMMENT_START"* ]]; then
             # delete between patterns (inclusive)
-            BODY=$(echo "$BODY" | sed '/<!-- pull-request-review-start -->/,/<!-- pull-request-review-end -->/d')
+            BODY=$(echo "$BODY" | sed '/<!--pull-request-review-start-->/,/<!--pull-request-review-end-->/d')
           fi
-          BODY=$(printf '%s\n%s\n%s\n%s\n' "$BODY" $COMMENT_START "$RESPONSE" $COMMENT_END)
+          BODY=$(printf '%s\n%s\n> [!NOTE]\n%s\n%s\n' "$BODY" $COMMENT_START "$RESPONSE" $COMMENT_END)
           gh pr edit $PR_NUMBER --body "$BODY"
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           PROMPT: |
-            Summarize code diff succinctly in GitHub Markdown note blockquote:
+            Summarize code diff succinctly:
