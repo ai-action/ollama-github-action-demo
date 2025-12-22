@@ -180,7 +180,7 @@ jobs:
           echo "| ${{ inputs.model }} | $PROMPT |" >> $GITHUB_STEP_SUMMARY
 
       - name: Run LLM
-        uses: ai-action/ollama-action@v1
+        uses: ai-action/ollama-action@v2
         id: llm
         with:
           model: ${{ inputs.model }}
