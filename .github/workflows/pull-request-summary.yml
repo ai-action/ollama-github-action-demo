@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Pull request summary
-        uses: ai-action/pull-request-summary@v1
+        uses: ai-action/pull-request-summary@v2
