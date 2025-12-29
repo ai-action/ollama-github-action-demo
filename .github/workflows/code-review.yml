@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code review
-        uses: ai-action/pull-request-review@v1
+        uses: ai-action/pull-request-review@v2
